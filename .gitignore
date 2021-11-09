@@ -1,0 +1,9 @@
+/.idea/
+/target/
+/*.iml
+/*.class
+/*.zip
+/*.war
+**/allure-results
+**/.allure
+**/allure-report
