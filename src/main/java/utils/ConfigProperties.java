@@ -11,6 +11,9 @@ public class ConfigProperties {
 
     private static final Logger LOGGER = Logger.getLogger(ConfigProperties.class.getName());
     private static final String PATH = "src/test/resources/config.properties";
+    public static final String API_KEY = "api-key";
+    public static final String TOKEN = "token";
+    public static final String BASE_URI = "base-uri";
 
     public static String getProperty(String property) {
 
@@ -23,5 +26,17 @@ public class ConfigProperties {
             LOGGER.log(Level.WARNING, ex.getMessage());
         }
         return null;
+    }
+
+    public static String getApiKey() {
+        return ConfigProperties.getProperty(API_KEY);
+    }
+
+    public static String getToken() {
+        return ConfigProperties.getProperty(TOKEN);
+    }
+
+    public static String getBaseUri() {
+        return ConfigProperties.getProperty(BASE_URI);
     }
 }

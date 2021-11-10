@@ -1,5 +1,9 @@
 package api.service;
 
+import static utils.ConfigProperties.getApiKey;
+import static utils.ConfigProperties.getBaseUri;
+import static utils.ConfigProperties.getToken;
+
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -9,29 +13,12 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-import utils.ConfigProperties;
 
 public class TrelloService {
 
     public RequestSpecification REQUEST_SPECIFICATION;
     public ResponseSpecification RESPONSE_SPECIFICATION;
-
-    public static final String API_KEY = "api-key";
-    public static final String TOKEN = "token";
-    public static final String BASE_URI = "base-uri";
-
-    public String getApiKey() {
-        return ConfigProperties.getProperty(API_KEY);
-    }
-
-    public String getToken() {
-        return ConfigProperties.getProperty(TOKEN);
-    }
-
-    public String getBaseUri() {
-        return ConfigProperties.getProperty(BASE_URI);
-    }
-
+    
     public RequestSpecification requestSpec() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         return REQUEST_SPECIFICATION = new RequestSpecBuilder()
