@@ -4,7 +4,7 @@ import api.BaseApiTest;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-public class BoardTests extends BaseApiTest {
+public class BoardApiTests extends BaseApiTest {
 
     private static final String BOARD_NAME_1 = "Kanban1";
     private static final String BOARD_NAME_2 = "Kanban2";
