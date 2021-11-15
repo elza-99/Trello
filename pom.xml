@@ -31,6 +31,7 @@
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <json.version>20210307</json.version>
     <jackson-annotations.version>2.13.0</jackson-annotations.version>
+    <allure-rest-assured.version>2.16.1</allure-rest-assured.version>
 
   </properties>
 
@@ -70,6 +71,12 @@
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
       <version>${allure.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-rest-assured</artifactId>
+      <version>${allure-rest-assured.version}</version>
     </dependency>
 
     <dependency>
@@ -114,12 +121,22 @@
 
   <profiles>
     <profile>
-      <id>createboard</id>
+      <id>allTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <suite.xml>${project.basedir}/src/test/resources/suites/createboard.xml</suite.xml>
+        <suite.xml>${project.basedir}/src/test/resources/suites/allTests.xml</suite.xml>
+      </properties>
+    </profile>
+    
+    <profile>
+      <id>apiAndUiTests</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <suite.xml>${project.basedir}/src/test/resources/suites/apiAndUiTests.xml</suite.xml>
       </properties>
     </profile>
   </profiles>

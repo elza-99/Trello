@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import ui.assertions.BoardsApiAssertions;
 
 public class BaseApiTest {
 
-    public BoardsService boardsService;
-    public ListsService listsService;
-    public ListDto listDto;
-    public BoardDto boardDto;
-    public List<String> ids = new ArrayList<>();
+    protected BoardsService boardsService;
+    protected ListsService listsService;
+    protected ListDto listDto;
+    protected BoardDto boardDto;
+    protected BoardsApiAssertions boardsApiAssertions;
+    protected List<String> ids = new ArrayList<>();
 
     @BeforeMethod(alwaysRun = true)
     public void setup() {
@@ -23,6 +25,7 @@ public class BaseApiTest {
         listsService = new ListsService();
         listDto = new ListDto();
         boardDto = new BoardDto();
+        boardsApiAssertions = new BoardsApiAssertions();
     }
 
     @AfterMethod(alwaysRun = true)

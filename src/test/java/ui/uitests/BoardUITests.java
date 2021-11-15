@@ -22,14 +22,14 @@ public class BoardUITests extends BaseUITest {
     }
 
     @Test(description = "Test2", groups = "Regression")
-    public void createBoardTest() {
+    public void createBoardTest() throws Exception {
         boardName1 = BOARD_NAME_1 + RandomStringUtils.randomAlphabetic(4);
         workspaces.clickCreateBoardTile();
         workspaces.inputBoardName(boardName1);
         workspaces.clickCreateBoardSubmitButton();
         headerMenu.clickRecentlyViewedBoards();
         headerMenuAssertions.assertThatBoardIsCreated(boardName1);
-        String id = apiBoardsWorkflow.getBoardId(boardName1);
+        String id = boardsService.getBoardId(boardName1);
         ids.add(id);
     }
 
@@ -38,7 +38,8 @@ public class BoardUITests extends BaseUITest {
         boardName2 = BOARD_NAME_2 + RandomStringUtils.randomAlphabetic(4);
         listName1 = LIST_NAME_1 + RandomStringUtils.randomAlphabetic(4);
         boardDto.setName(boardName2);
-        String id = apiBoardsWorkflow.createBoardViaApi(boardDto).getId();
+        boardDto.setDefaultLists(false);
+        String id = boardsService.createBoard(boardDto).getId();
         ids.add(id);
         workspaces.clickBoardByName(boardName2);
         boardsPage.addNewList();
@@ -51,7 +52,8 @@ public class BoardUITests extends BaseUITest {
     public void deleteBoardTest() {
         boardName3 = BOARD_NAME_3 + RandomStringUtils.randomAlphabetic(4);
         boardDto.setName(boardName3);
-        String id = apiBoardsWorkflow.createBoard(boardDto).getId();
+        boardDto.setDefaultLists(false);
+        String id = boardsService.createBoard(boardDto).getId();
         ids.add(id);
         workspaces.clickBoardByName(boardName3);
         boardsActions.deleteBoard();

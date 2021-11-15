@@ -4,6 +4,7 @@ import static utils.ConfigProperties.getApiKey;
 import static utils.ConfigProperties.getBaseUri;
 import static utils.ConfigProperties.getToken;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -28,6 +29,7 @@ public class TrelloService {
                 .addQueryParam("token", getToken())
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
+                .addFilter(new AllureRestAssured())
                 .build();
     }
 

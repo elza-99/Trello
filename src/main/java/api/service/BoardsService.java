@@ -4,9 +4,11 @@ import static api.service.URI.GET_BOARD_URL;
 import static api.service.URI.GET_BOARDS_URL;
 import static api.service.URI.GET_MEMBER_BOARDS_URL;
 import static java.text.MessageFormat.format;
+import static utils.ConfigProperties.getMemberId;
 
 import api.dao.BoardDto;
 import io.qameta.allure.Step;
+import java.util.Arrays;
 
 public class BoardsService extends TrelloService {
 
@@ -33,5 +35,12 @@ public class BoardsService extends TrelloService {
     @Step
     public BoardDto[] getAllBoards(String memberId) {
         return parser(getGetResponse(format(GET_MEMBER_BOARDS_URL, memberId)), new BoardDto[] {});
+    }
+
+    public String getBoardId(String boardName) throws Exception {
+        return Arrays.stream(getAllBoards(getMemberId()))
+                .filter(x -> x.getName().equals(boardName))
+                .findFirst().orElseThrow(Exception::new).getId();
+       
     }
 }

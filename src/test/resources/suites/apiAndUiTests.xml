@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="apiAndUiTests">
+  <test name="BoardApiTests">
+    <classes>
+      <class name="api.apitests.BoardApiTests"></class>
+    </classes>
+  </test>
+  <test name="BoardUITests">
+    <classes>
+      <class name="ui.uitests.BoardUITests"></class>
+    </classes>
+  </test>
+</suite>

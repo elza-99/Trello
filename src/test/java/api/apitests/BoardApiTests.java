@@ -1,18 +1,27 @@
 package api.apitests;
 
 import api.BaseApiTest;
-import org.assertj.core.api.Assertions;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
 
 public class BoardApiTests extends BaseApiTest {
 
-    private static final String BOARD_NAME_1 = "Kanban1";
-    private static final String BOARD_NAME_2 = "Kanban2";
-    private static final String LIST_NAME_1 = "TO DO";
+    private static final String BOARD_NAME_1 = "BOARD_1_";
+    private static final String BOARD_NAME_2 = "BOARD_2_";
+    private static final String BOARD_NAME_3 = "BOARD_3_";
+    private static final String BOARD_NAME_4 = "BOARD_4_";
+    private static final String LIST_NAME_1 = "TO DO_1_";
+
+    private String boardName1;
+    private String boardName2;
+    private String boardName3;
+    private String boardName4;
+    private String listName1;
 
     @Test(description = "Test1", groups = "Regression")
     public void createAndGetNewBoard() {
-        boardDto.setName(BOARD_NAME_1);
+        boardName1 = BOARD_NAME_1 + RandomStringUtils.randomAlphabetic(4);
+        boardDto.setName(boardName1);
         boardDto.setDefaultLists(false);
         String id = boardsService.createBoard(boardDto).getId();
         ids.add(id);
@@ -21,22 +30,26 @@ public class BoardApiTests extends BaseApiTest {
 
     @Test(description = "Test2", groups = "Regression")
     public void updateNewBoard() {
-        boardDto.setName(BOARD_NAME_1);
+        boardName2 = BOARD_NAME_2 + RandomStringUtils.randomAlphabetic(4);
+        boardName3 = BOARD_NAME_3 + RandomStringUtils.randomAlphabetic(4);
+        boardDto.setName(boardName2);
         boardDto.setDefaultLists(false);
         String id = boardsService.createBoard(boardDto).getId();
         ids.add(id);
-        boardDto.setName(BOARD_NAME_2);
+        boardDto.setName(boardName3);
         String name = boardsService.updateBoard(boardDto, id).getName();
-        Assertions.assertThat(name.equalsIgnoreCase(BOARD_NAME_2));
+        boardsApiAssertions.assertThatBoardNameUpdated(name, boardName3);
     }
 
     @Test(description = "Test3", groups = "Regression")
     public void createListAndGetLists() {
-        boardDto.setName(BOARD_NAME_1);
+        boardName4 = BOARD_NAME_4 + RandomStringUtils.randomAlphabetic(4);
+        listName1 = LIST_NAME_1 + RandomStringUtils.randomAlphabetic(4);
+        boardDto.setName(boardName4);
         boardDto.setDefaultLists(false);
         String id1 = boardsService.createBoard(boardDto).getId();
         ids.add(id1);
-        listDto.setName(LIST_NAME_1);
+        listDto.setName(listName1);
         listDto.setIdBoard(id1);
         listsService.createList(listDto, id1);
         listsService.getLists(id1);

@@ -2,23 +2,23 @@ package ui.actions;
 
 import org.openqa.selenium.WebDriver;
 import ui.pageobjects.AbstractPage;
-import ui.pageobjects.BoardsPage;
 
 public class BoardsActions extends AbstractPage {
 
-    protected BoardsPage boardsPage;
+    protected BoardsActionsBuilder boardsActionsBuilder;
 
     public BoardsActions(WebDriver driver) {
         super(driver);
     }
 
     public void deleteBoard() {
-        boardsPage = new BoardsPage(driver);
-        boardsPage.clickBoardsMenu();
-        boardsPage.clickBoardsMenuMore();
-        boardsPage.clickCloseBoardLink();
-        boardsPage.clickCloseConfirmButton();
-        boardsPage.clickDeleteBoardButton();
-        boardsPage.clickDeleteConfirmButton();
+        boardsActionsBuilder = new BoardsActionsBuilder(driver);
+        boardsActionsBuilder.clickBoardsMenu()
+                .clickBoardsMenuMore()
+                .clickCloseBoardLink()
+                .clickCloseConfirmButton()
+                .clickDeleteBoardButton()
+                .clickDeleteConfirmButton()
+                .build();
     }
 }

@@ -5,6 +5,7 @@ import static utils.ConfigProperties.getUrl;
 import static utils.ConfigProperties.getUser;
 
 import api.dao.BoardDto;
+import api.service.BoardsService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,8 +15,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import ui.actions.BoardsActions;
 import ui.actions.LoginActions;
-import ui.apiworkflow.ApiBoardsWorkflow;
-import ui.assertions.BoardsAssertions;
+import ui.assertions.BoardsUIAssertions;
 import ui.assertions.HeaderMenuAssertions;
 import ui.assertions.WorkspacesAssertions;
 import ui.components.HeaderMenu;
@@ -38,10 +38,10 @@ public class BaseUITest {
     protected HeaderMenu headerMenu;
     protected HomePage homePage;
     protected BoardsPage boardsPage;
-    protected BoardsAssertions boardsAssertions;
+    protected BoardsUIAssertions boardsAssertions;
     protected HeaderMenuAssertions headerMenuAssertions;
     protected WorkspacesAssertions workspacesAssertions;
-    protected ApiBoardsWorkflow apiBoardsWorkflow;
+    protected BoardsService boardsService;
     protected BoardDto boardDto;
     protected LoginActions loginActions;
     protected BoardsActions boardsActions;
@@ -58,10 +58,10 @@ public class BaseUITest {
         headerMenu = new HeaderMenu(driver);
         homePage = new HomePage(driver);
         boardsPage = new BoardsPage(driver);
-        boardsAssertions = new BoardsAssertions(driver);
+        boardsAssertions = new BoardsUIAssertions(driver);
         headerMenuAssertions = new HeaderMenuAssertions(driver);
         workspacesAssertions = new WorkspacesAssertions(driver);
-        apiBoardsWorkflow = new ApiBoardsWorkflow();
+        boardsService = new BoardsService();
         boardDto = new BoardDto();
         loginActions = new LoginActions(driver);
         boardsActions = new BoardsActions(driver);
@@ -75,7 +75,7 @@ public class BaseUITest {
         if (!ids.isEmpty()) {
             for (String id : ids) {
                 try {
-                    apiBoardsWorkflow.deleteBoardViaApi(id);
+                    boardsService.deleteBoard(id);
                 } catch (AssertionError e) {
                     LOGGER.log(Level.WARNING, e.getMessage());
                 }
