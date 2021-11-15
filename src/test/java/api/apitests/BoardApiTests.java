@@ -24,8 +24,8 @@ public class BoardApiTests extends BaseApiTest {
         boardDto.setName(boardName1);
         boardDto.setDefaultLists(false);
         String id = boardsService.createBoard(boardDto).getId();
-        ids.add(id);
         boardsService.getBoard(id);
+        boardsService.deleteBoard(id);
     }
 
     @Test(description = "Test2", groups = "Regression")
@@ -35,10 +35,10 @@ public class BoardApiTests extends BaseApiTest {
         boardDto.setName(boardName2);
         boardDto.setDefaultLists(false);
         String id = boardsService.createBoard(boardDto).getId();
-        ids.add(id);
         boardDto.setName(boardName3);
         String name = boardsService.updateBoard(boardDto, id).getName();
         boardsApiAssertions.assertThatBoardNameUpdated(name, boardName3);
+        boardsService.deleteBoard(id);
     }
 
     @Test(description = "Test3", groups = "Regression")
@@ -47,11 +47,11 @@ public class BoardApiTests extends BaseApiTest {
         listName1 = LIST_NAME_1 + RandomStringUtils.randomAlphabetic(4);
         boardDto.setName(boardName4);
         boardDto.setDefaultLists(false);
-        String id1 = boardsService.createBoard(boardDto).getId();
-        ids.add(id1);
+        String id = boardsService.createBoard(boardDto).getId();
         listDto.setName(listName1);
-        listDto.setIdBoard(id1);
-        listsService.createList(listDto, id1);
-        listsService.getLists(id1);
+        listDto.setIdBoard(id);
+        listsService.createList(listDto, id);
+        listsService.getLists(id);
+        boardsService.deleteBoard(id);
     }
 }
