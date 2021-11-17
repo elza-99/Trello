@@ -3,6 +3,7 @@ package ui.uitests;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
 import ui.BaseUITest;
+import ui.assertions.BoardsUIAssertions;
 
 public class BoardUITests extends BaseUITest {
 
@@ -24,9 +25,7 @@ public class BoardUITests extends BaseUITest {
     @Test(description = "Test2", groups = "Regression")
     public void createBoardTest() throws Exception {
         boardName1 = BOARD_NAME_1 + RandomStringUtils.randomAlphabetic(4);
-        workspaces.clickCreateBoardTile();
-        workspaces.inputBoardName(boardName1);
-        workspaces.clickCreateBoardSubmitButton();
+        boardsActions.createBoard(boardName1);
         headerMenu.clickRecentlyViewedBoards();
         headerMenuAssertions.assertThatBoardIsCreated(boardName1);
         String id = boardsService.getBoardId(boardName1);
@@ -34,7 +33,7 @@ public class BoardUITests extends BaseUITest {
     }
 
     @Test(description = "Test3", groups = "Regression")
-    public void createListTest() {
+    public void createListTest() throws Exception {
         boardName2 = BOARD_NAME_2 + RandomStringUtils.randomAlphabetic(4);
         listName1 = LIST_NAME_1 + RandomStringUtils.randomAlphabetic(4);
         boardDto.setName(boardName2);
@@ -42,14 +41,12 @@ public class BoardUITests extends BaseUITest {
         String id = boardsService.createBoard(boardDto).getId();
         ids.add(id);
         workspaces.clickBoardByName(boardName2);
-        boardsPage.addNewList();
-        boardsPage.inputListName(listName1);
-        boardsPage.clickSubmitAddListButton();
-        boardsAssertions.assertThatBoardContainsCreatedList(listName1);
+        boardsActions.addNewListToBoard(listName1);
+        new BoardsUIAssertions(driver, boardsPage).assertThatBoardContainsCreatedList(listName1);
     }
 
     @Test(description = "Test4", groups = "Regression")
-    public void deleteBoardTest() {
+    public void deleteBoardTest() throws Exception {
         boardName3 = BOARD_NAME_3 + RandomStringUtils.randomAlphabetic(4);
         boardDto.setName(boardName3);
         boardDto.setDefaultLists(false);

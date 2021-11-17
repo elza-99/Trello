@@ -24,7 +24,7 @@ public class BoardApiTests extends BaseApiTest {
         boardDto.setName(boardName1);
         boardDto.setDefaultLists(false);
         String id = boardsService.createBoard(boardDto).getId();
-        boardsService.getBoard(id);
+        boardsApiAssertions.assertThatBoardWasCreated(id, boardName1);
         boardsService.deleteBoard(id);
     }
 

@@ -11,7 +11,6 @@ public class HeaderMenu extends AbstractContainer {
 
     @FindBy(xpath = "//a[@href='/login']")
     private WebElement loginLink;
-
     @FindBy(css = "button[data-test-id='header-member-menu-button']")
     private WebElement headerMemberMenuButton;
     @FindBy(css = "li[data-test-id='create-board-tile']")
@@ -20,8 +19,6 @@ public class HeaderMenu extends AbstractContainer {
     private WebElement header;
     @FindBy(css = "button[data-test-id='workspace-switcher']")
     private WebElement workspaceSwitcher;
-    @FindBy(className = "_2ft40Nx3NZII2i")
-    private WebElement homePageIcon;
     @FindBy(css = "button[data-test-id='recently-viewed-boards-menu']")
     private WebElement recentlyViewedBoardsMenu;
     @FindBy(css = "li[class=UtX-sCYI8xMcaV]")

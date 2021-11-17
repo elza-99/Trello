@@ -9,13 +9,13 @@ public class WorkspacesAssertions extends UIAsserts {
 
     protected Workspaces workspaces;
 
-    public WorkspacesAssertions(WebDriver driver) {
+    public WorkspacesAssertions(WebDriver driver, Workspaces workspaces) {
         super(driver);
+        this.workspaces = workspaces;
     }
 
-    @Step
+    @Step(value = "Assert that List does not contain created Board {0}")
     public void assertThatListDoesNotContainCreatedBoard(String boardName) {
-        workspaces = new Workspaces(driver);
         Assertions.assertThat(workspaces.getBoards().contains(boardName)).isFalse()
                 .withFailMessage("The board is still in the list.");
     }

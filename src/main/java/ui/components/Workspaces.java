@@ -38,7 +38,7 @@ public class Workspaces extends AbstractContainer {
     public void clickCreateBoardSubmitButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createBoardSubmitButton));
         createBoardSubmitButton.click();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
 
     }
 
@@ -46,18 +46,12 @@ public class Workspaces extends AbstractContainer {
         return boards.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public WebElement getBoardByName(String name) {
-        WebElement element = null;
-        for (WebElement e : boards) {
-            if (e.getText().contains(name)) {
-                element = e;
-            }
-        }
-        return element;
+    public WebElement getBoardByName(String name) throws Exception {
+        return boards.stream().filter(x -> x.getText().contains(name)).findFirst().orElseThrow(Exception::new);
     }
 
-    public void clickBoardByName(String name) {
+    public void clickBoardByName(String name) throws Exception {
         getBoardByName(name).click();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
     }
 }

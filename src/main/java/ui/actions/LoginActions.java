@@ -21,10 +21,7 @@ public class LoginActions extends AbstractPage {
                 .sendKeysToUserInputField(username)
                 .clickLogin()
                 .enterPassword(password)
-                .submitLogin()
-                .build();
-        driver.manage()
-                .timeouts()
-                .implicitlyWait(40, TimeUnit.SECONDS);
+                .submitLogin();
+        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
     }
 }

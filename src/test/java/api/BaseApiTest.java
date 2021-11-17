@@ -1,11 +1,11 @@
 package api;
 
+import api.assertions.BoardsApiAssertions;
 import api.dao.BoardDto;
 import api.dao.ListDto;
 import api.service.BoardsService;
 import api.service.ListsService;
 import org.testng.annotations.BeforeMethod;
-import ui.assertions.BoardsApiAssertions;
 
 public class BaseApiTest {
 

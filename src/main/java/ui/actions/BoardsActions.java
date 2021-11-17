@@ -7,18 +7,29 @@ public class BoardsActions extends AbstractPage {
 
     protected BoardsActionsBuilder boardsActionsBuilder;
 
-    public BoardsActions(WebDriver driver) {
+    public BoardsActions(WebDriver driver, BoardsActionsBuilder boardsActionsBuilder) {
         super(driver);
+        this.boardsActionsBuilder = boardsActionsBuilder;
     }
 
+    public void createBoard(String name) {
+        boardsActionsBuilder.clickCreateBoard()
+                .inputNameOfBoard(name)
+                .clickSubmitCreateBoardButton();
+    }
+    
     public void deleteBoard() {
-        boardsActionsBuilder = new BoardsActionsBuilder(driver);
         boardsActionsBuilder.clickBoardsMenu()
                 .clickBoardsMenuMore()
                 .clickCloseBoardLink()
                 .clickCloseConfirmButton()
                 .clickDeleteBoardButton()
-                .clickDeleteConfirmButton()
-                .build();
+                .clickDeleteConfirmButton();
+    }
+    
+    public void addNewListToBoard(String name) {
+        boardsActionsBuilder.addList()
+                .inputNameOfList(name)
+                .clickSubmitAddList();
     }
 }

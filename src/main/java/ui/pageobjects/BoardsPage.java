@@ -36,7 +36,7 @@ public class BoardsPage extends AbstractPage {
     }
 
     public void addNewList() {
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
         addNewListTile.click();
     }
 

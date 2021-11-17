@@ -31,7 +31,7 @@ public class LoginPage extends AbstractPage {
 
     public void clickLogin() {
         login.click();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(continueLogin));
     }
 

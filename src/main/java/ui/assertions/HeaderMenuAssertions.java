@@ -9,13 +9,13 @@ public class HeaderMenuAssertions extends UIAsserts {
 
     protected HeaderMenu headerMenu;
 
-    public HeaderMenuAssertions(WebDriver driver) {
+    public HeaderMenuAssertions(WebDriver driver, HeaderMenu headerMenu) {
         super(driver);
+        this.headerMenu = headerMenu;
     }
 
-    @Step
+    @Step(value = "Assert that Board {0} is created")
     public void assertThatBoardIsCreated(String boardName) {
-        headerMenu = new HeaderMenu(driver);
         Assertions.assertThat(headerMenu.getBoards().contains(boardName))
                 .withFailMessage("The defined board does not exist.");
     }

@@ -12,8 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import ui.actions.BoardsActions;
+import ui.actions.BoardsActionsBuilder;
 import ui.actions.LoginActions;
 import ui.assertions.BoardsUIAssertions;
 import ui.assertions.HeaderMenuAssertions;
@@ -45,9 +47,10 @@ public class BaseUITest {
     protected BoardDto boardDto;
     protected LoginActions loginActions;
     protected BoardsActions boardsActions;
+    protected BoardsActionsBuilder boardsActionsBuilder;
     protected List<String> ids = new ArrayList<>();
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setup() {
         WebDriverManager.chromedriver().setup();
         WebDriverInstance.INSTANCE.createdDriver("chrome");
@@ -58,18 +61,22 @@ public class BaseUITest {
         headerMenu = new HeaderMenu(driver);
         homePage = new HomePage(driver);
         boardsPage = new BoardsPage(driver);
-        boardsAssertions = new BoardsUIAssertions(driver);
-        headerMenuAssertions = new HeaderMenuAssertions(driver);
-        workspacesAssertions = new WorkspacesAssertions(driver);
+        boardsAssertions = new BoardsUIAssertions(driver, boardsPage);
+        headerMenuAssertions = new HeaderMenuAssertions(driver, headerMenu);
+        workspacesAssertions = new WorkspacesAssertions(driver, workspaces);
         boardsService = new BoardsService();
         boardDto = new BoardDto();
         loginActions = new LoginActions(driver);
-        boardsActions = new BoardsActions(driver);
-
+        boardsActionsBuilder = new BoardsActionsBuilder(driver);
+        boardsActions = new BoardsActions(driver, boardsActionsBuilder);
+    }
+    
+    @BeforeMethod(alwaysRun = true)
+    public void login() {
         openSite();
         loginActions.loginWithSubmit(getUser(), getPassword());
     }
-
+    
     @AfterMethod(alwaysRun = true)
     public void cleanUp() {
         if (!ids.isEmpty()) {

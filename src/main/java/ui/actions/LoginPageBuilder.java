@@ -32,7 +32,4 @@ public class LoginPageBuilder extends AbstractContainer {
         this.loginPage.submitLogin();
         return this;
     }
-
-    public LoginPage build() {
-        return this.loginPage; }
 }
