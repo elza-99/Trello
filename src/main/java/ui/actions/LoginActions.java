@@ -1,5 +1,7 @@
 package ui.actions;
 
+import static utils.ConfigProperties.TIME_OUT;
+
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import ui.components.HeaderMenu;

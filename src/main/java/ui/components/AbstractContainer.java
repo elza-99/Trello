@@ -6,8 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class AbstractContainer {
 
-    protected final long TIME_OUT = 40;
-
     public WebDriver driver;
     public WebDriverWait wait;
 

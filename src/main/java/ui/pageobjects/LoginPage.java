@@ -1,5 +1,7 @@
 package ui.pageobjects;
 
+import static utils.ConfigProperties.TIME_OUT;
+
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -16,6 +16,7 @@ public class ConfigProperties {
     public static final String PASSWORD = "password";
     public static final String URL = "url";
     public static final String MEMBER_ID = "member-id";
+    public static final long TIME_OUT = 40;
     private static final Logger LOGGER = Logger.getLogger(ConfigProperties.class.getName());
     private static final String PATH = "src/test/resources/config.properties";
 

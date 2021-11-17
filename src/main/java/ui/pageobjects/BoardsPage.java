@@ -1,5 +1,7 @@
 package ui.pageobjects;
 
+import static utils.ConfigProperties.TIME_OUT;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
