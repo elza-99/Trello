@@ -37,47 +37,56 @@ public class BoardsPage extends AbstractPage {
         super(driver);
     }
 
-    public void addNewList() {
+    public BoardsPage addNewList() {
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
         addNewListTile.click();
+        return this;
     }
 
-    public void inputListName(String listName) {
+    public BoardsPage inputListName(String listName) {
         listNameInput.sendKeys(listName);
+        return this;
     }
 
-    public void clickSubmitAddListButton() {
+    public BoardsPage clickSubmitAddListButton() {
         submitAddListButton.click();
+        return this;
     }
 
     public List<String> getLists() {
         return lists.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public void clickBoardsMenu() {
+    public BoardsPage clickBoardsMenu() {
         boardsMenu.click();
+        return this;
     }
 
-    public void clickBoardsMenuMore() {
+    public BoardsPage clickBoardsMenuMore() {
         boardsMenuMore.click();
+        return this;
     }
 
-    public void clickCloseBoardLink() {
+    public BoardsPage clickCloseBoardLink() {
         wait.until(ExpectedConditions.visibilityOf(closeBoardLink));
         closeBoardLink.click();
+        return this;
     }
 
-    public void clickCloseConfirmButton() {
+    public BoardsPage clickCloseConfirmButton() {
         wait.until(ExpectedConditions.visibilityOf(closeConfirmButton));
         closeConfirmButton.click();
+        return this;
     }
 
-    public void clickDeleteBoardButton() {
+    public BoardsPage clickDeleteBoardButton() {
         wait.until(ExpectedConditions.visibilityOf(deleteBoardButton));
         deleteBoardButton.click();
+        return this;
     }
 
-    public void clickDeleteConfirmButton() {
+    public BoardsPage clickDeleteConfirmButton() {
         deleteConfirmButton.click();
+        return this;
     }
 }

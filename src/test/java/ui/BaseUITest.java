@@ -15,7 +15,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import ui.actions.BoardsActions;
-import ui.actions.BoardsActionsBuilder;
 import ui.actions.LoginActions;
 import ui.assertions.BoardsUIAssertions;
 import ui.assertions.HeaderMenuAssertions;
@@ -47,7 +46,6 @@ public class BaseUITest {
     protected BoardDto boardDto;
     protected LoginActions loginActions;
     protected BoardsActions boardsActions;
-    protected BoardsActionsBuilder boardsActionsBuilder;
     protected List<String> ids = new ArrayList<>();
 
     @BeforeClass(alwaysRun = true)
@@ -66,9 +64,8 @@ public class BaseUITest {
         workspacesAssertions = new WorkspacesAssertions(driver, workspaces);
         boardsService = new BoardsService();
         boardDto = new BoardDto();
-        loginActions = new LoginActions(driver);
-        boardsActionsBuilder = new BoardsActionsBuilder(driver);
-        boardsActions = new BoardsActions(driver, boardsActionsBuilder);
+        loginActions = new LoginActions(driver, loginPage);
+        boardsActions = new BoardsActions(driver, boardsPage);
     }
     
     @BeforeMethod(alwaysRun = true)

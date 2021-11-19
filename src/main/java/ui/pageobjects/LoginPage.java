@@ -27,21 +27,25 @@ public class LoginPage extends AbstractPage {
         this.headerMenu = new HeaderMenu(driver);
     }
 
-    public void sendKeysToUserInputField(String user) {
+    public LoginPage sendKeysToUserInputField(String user) {
         userInputField.sendKeys(user);
+        return this;
     }
 
-    public void clickLogin() {
+    public LoginPage clickLogin() {
         login.click();
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOf(continueLogin));
+        return this;
     }
 
-    public void enterPassword(String password) {
+    public LoginPage enterPassword(String password) {
         passwordInputField.sendKeys(password);
+        return this;
     }
 
-    public void submitLogin() {
+    public LoginPage submitLogin() {
         loginSubmit.click();
+        return this;
     }
 }

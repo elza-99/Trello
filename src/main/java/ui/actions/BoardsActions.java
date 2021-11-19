@@ -2,24 +2,25 @@ package ui.actions;
 
 import org.openqa.selenium.WebDriver;
 import ui.pageobjects.AbstractPage;
+import ui.pageobjects.BoardsPage;
 
 public class BoardsActions extends AbstractPage {
 
-    protected BoardsActionsBuilder boardsActionsBuilder;
+    protected BoardsPage boardsPage;
 
-    public BoardsActions(WebDriver driver, BoardsActionsBuilder boardsActionsBuilder) {
+    public BoardsActions(WebDriver driver, BoardsPage boardsPage) {
         super(driver);
-        this.boardsActionsBuilder = boardsActionsBuilder;
+        this.boardsPage = boardsPage;
     }
 
     public void createBoard(String name) {
-        boardsActionsBuilder.clickCreateBoard()
-                .inputNameOfBoard(name)
-                .clickSubmitCreateBoardButton();
+        workspaces.clickCreateBoardTile()
+                .inputBoardName(name)
+                .clickCreateBoardSubmitButton();
     }
     
     public void deleteBoard() {
-        boardsActionsBuilder.clickBoardsMenu()
+        boardsPage.clickBoardsMenu()
                 .clickBoardsMenuMore()
                 .clickCloseBoardLink()
                 .clickCloseConfirmButton()
@@ -28,8 +29,8 @@ public class BoardsActions extends AbstractPage {
     }
     
     public void addNewListToBoard(String name) {
-        boardsActionsBuilder.addList()
-                .inputNameOfList(name)
-                .clickSubmitAddList();
+        boardsPage.addNewList()
+                .inputListName(name)
+                .clickSubmitAddListButton();
     }
 }

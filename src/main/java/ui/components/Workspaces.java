@@ -27,21 +27,23 @@ public class Workspaces extends AbstractContainer {
         super(driver);
     }
 
-    public void clickCreateBoardTile() {
+    public Workspaces clickCreateBoardTile() {
         wait.until(ExpectedConditions.visibilityOf(createBoardTile));
         createBoardTile.click();
+        return this;
     }
 
-    public void inputBoardName(String boardName) {
+    public Workspaces inputBoardName(String boardName) {
         wait.until(ExpectedConditions.visibilityOf(createBoardTitleInput));
         createBoardTitleInput.sendKeys(boardName);
+        return this;
     }
 
-    public void clickCreateBoardSubmitButton() {
+    public Workspaces clickCreateBoardSubmitButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createBoardSubmitButton));
         createBoardSubmitButton.click();
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
-
+        return this;
     }
 
     public List<String> getBoards() {
@@ -52,8 +54,9 @@ public class Workspaces extends AbstractContainer {
         return boards.stream().filter(x -> x.getText().contains(name)).findFirst().orElseThrow(Exception::new);
     }
 
-    public void clickBoardByName(String name) throws Exception {
+    public Workspaces clickBoardByName(String name) throws Exception {
         getBoardByName(name).click();
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
+        return this;
     }
 }
