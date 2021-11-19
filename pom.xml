@@ -15,7 +15,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <java.source.version>1.8</java.source.version>
     <java.target.version>1.8</java.target.version>
-    <testing.version>7.0.0</testing.version>
+    <testing.version>7.4.0</testing.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
@@ -31,6 +31,7 @@
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <json.version>20210307</json.version>
     <jackson-annotations.version>2.13.0</jackson-annotations.version>
+    <allure-rest-assured.version>2.16.1</allure-rest-assured.version>
 
   </properties>
 
@@ -73,6 +74,12 @@
     </dependency>
 
     <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-rest-assured</artifactId>
+      <version>${allure-rest-assured.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj.version}</version>
@@ -110,16 +117,33 @@
       <artifactId>jackson-annotations</artifactId>
       <version>${jackson-annotations.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.4.0</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
     <profile>
-      <id>createboard</id>
+      <id>allTests</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <suite.xml>${project.basedir}/src/test/resources/suites/createboard.xml</suite.xml>
+        <suite.xml>${project.basedir}/src/test/resources/suites/allTests.xml</suite.xml>
+      </properties>
+    </profile>
+    
+    <profile>
+      <id>apiAndUiTests</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <suite.xml>${project.basedir}/src/test/resources/suites/apiAndUiTests.xml</suite.xml>
       </properties>
     </profile>
   </profiles>
