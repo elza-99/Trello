@@ -2,6 +2,7 @@ package ui.pageobjects;
 
 import static utils.ConfigProperties.TIME_OUT;
 
+import io.qameta.allure.Step;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -37,54 +38,64 @@ public class BoardsPage extends AbstractPage {
         super(driver);
     }
 
+    @Step(value = "Add New List")
     public BoardsPage addNewList() {
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
         addNewListTile.click();
         return this;
     }
 
+    @Step(value = "Input List Name {0}")
     public BoardsPage inputListName(String listName) {
         listNameInput.sendKeys(listName);
         return this;
     }
 
+    @Step(value = "Click Submit Add List Button")
     public BoardsPage clickSubmitAddListButton() {
         submitAddListButton.click();
         return this;
     }
 
+    @Step(value = "Get Lists")
     public List<String> getLists() {
         return lists.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
+    @Step(value = "Click Boards Menu")
     public BoardsPage clickBoardsMenu() {
         boardsMenu.click();
         return this;
     }
 
+    @Step(value = "Click Boards Menu More")
     public BoardsPage clickBoardsMenuMore() {
         boardsMenuMore.click();
         return this;
     }
 
+    @Step(value = "Click Close Board Link")
     public BoardsPage clickCloseBoardLink() {
         wait.until(ExpectedConditions.visibilityOf(closeBoardLink));
         closeBoardLink.click();
         return this;
     }
 
+    @Step(value = "Click Close Confirm Button")
     public BoardsPage clickCloseConfirmButton() {
         wait.until(ExpectedConditions.visibilityOf(closeConfirmButton));
         closeConfirmButton.click();
         return this;
     }
 
+    @Step(value = "Click Delete Board Button")
     public BoardsPage clickDeleteBoardButton() {
         wait.until(ExpectedConditions.visibilityOf(deleteBoardButton));
         deleteBoardButton.click();
         return this;
     }
 
+    @Step(value = "Click Delete Confirm Button")
     public BoardsPage clickDeleteConfirmButton() {
         deleteConfirmButton.click();
         return this;

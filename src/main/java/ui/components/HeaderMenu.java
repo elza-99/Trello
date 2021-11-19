@@ -1,5 +1,6 @@
 package ui.components;
 
+import io.qameta.allure.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebDriver;
@@ -27,20 +28,24 @@ public class HeaderMenu extends AbstractContainer {
     public HeaderMenu(WebDriver driver) {
         super(driver);
     }
-
+    
+    @Step(value = "Click Login Link")
     public void clickLoginLink() {
         loginLink.click();
     }
 
+    @Step(value = "Is Header Displayed")
     public boolean isHeaderDisplayed() {
         return header.isDisplayed();
     }
 
+    @Step(value = "Click Recently Viewed Boards")
     public void clickRecentlyViewedBoards() {
         wait.until(ExpectedConditions.visibilityOf(recentlyViewedBoardsMenu));
         recentlyViewedBoardsMenu.click();
     }
 
+    @Step(value = "Get Boards")
     public List<String> getBoards() {
         return boards.stream().map(WebElement::getText).collect(Collectors.toList());
     }

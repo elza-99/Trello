@@ -2,6 +2,7 @@ package ui.pageobjects;
 
 import static utils.ConfigProperties.TIME_OUT;
 
+import io.qameta.allure.Step;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,12 +27,14 @@ public class LoginPage extends AbstractPage {
         super(driver);
         this.headerMenu = new HeaderMenu(driver);
     }
-
+    
+    @Step(value = "Send Keys To User Input Field {0}")
     public LoginPage sendKeysToUserInputField(String user) {
         userInputField.sendKeys(user);
         return this;
     }
 
+    @Step(value = "Click Login")
     public LoginPage clickLogin() {
         login.click();
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
@@ -39,11 +42,13 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
+    @Step(value = "Enter Password {0}")
     public LoginPage enterPassword(String password) {
         passwordInputField.sendKeys(password);
         return this;
     }
 
+    @Step(value = "Submit Login")
     public LoginPage submitLogin() {
         loginSubmit.click();
         return this;

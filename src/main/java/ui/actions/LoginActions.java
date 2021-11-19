@@ -2,6 +2,7 @@ package ui.actions;
 
 import static utils.ConfigProperties.TIME_OUT;
 
+import io.qameta.allure.Step;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import ui.pageobjects.AbstractPage;
@@ -16,6 +17,7 @@ public class LoginActions extends AbstractPage {
         this.loginPage = loginPage;
     }
 
+    @Step(value = "Login With Submit {0} {1}")
     public void loginWithSubmit(String username, String password) {
         headerMenu.clickLoginLink();
         loginPage

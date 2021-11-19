@@ -2,6 +2,7 @@ package ui.components;
 
 import static utils.ConfigProperties.TIME_OUT;
 
+import io.qameta.allure.Step;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -26,19 +27,22 @@ public class Workspaces extends AbstractContainer {
     public Workspaces(WebDriver driver) {
         super(driver);
     }
-
+    
+    @Step(value = "Click Create Board Tile")
     public Workspaces clickCreateBoardTile() {
         wait.until(ExpectedConditions.visibilityOf(createBoardTile));
         createBoardTile.click();
         return this;
     }
 
+    @Step(value = "Input Board Name {0}")
     public Workspaces inputBoardName(String boardName) {
         wait.until(ExpectedConditions.visibilityOf(createBoardTitleInput));
         createBoardTitleInput.sendKeys(boardName);
         return this;
     }
 
+    @Step(value = "Click Create Board Submit Button")
     public Workspaces clickCreateBoardSubmitButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createBoardSubmitButton));
         createBoardSubmitButton.click();
@@ -46,14 +50,17 @@ public class Workspaces extends AbstractContainer {
         return this;
     }
 
+    @Step(value = "Get Boards")
     public List<String> getBoards() {
         return boards.stream().map(WebElement::getText).collect(Collectors.toList());
     }
-
+    
+    @Step(value = "Get Board By Name {0}")
     public WebElement getBoardByName(String name) throws Exception {
         return boards.stream().filter(x -> x.getText().contains(name)).findFirst().orElseThrow(Exception::new);
     }
 
+    @Step(value = "Click Board By Name {0}")
     public Workspaces clickBoardByName(String name) throws Exception {
         getBoardByName(name).click();
         driver.manage().timeouts().implicitlyWait(TIME_OUT, TimeUnit.SECONDS);
